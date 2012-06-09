@@ -44,10 +44,10 @@ class RatingsComponent extends Component
 
 		$this->Session->write('Feedback.RatingModels', $this->models);
 
-		foreach ($this->models as $model => $class)
+		foreach ($this->models as $modelClass => $model)
 		{
-			$data = $this->readRatingCookie($model);
-			$this->Session->write('Feedback.'.$model.'Ratings', $data);
+			$data = $this->readRatingCookie($modelClass);
+			$this->Session->write('Feedback.'.$modelClass.'Ratings', $data);
 		}
 
 		if (!in_array('Feedback.Ratings', $controller->helpers))
