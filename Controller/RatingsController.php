@@ -79,7 +79,7 @@ class RatingsController extends FeedbackAppController
 			return $this->redirect('/');
 		}
 
-		$this->request->data['Rating']['foreign_table'] = $this->{$modelClass}->name;
+		$this->request->data['Rating']['foreign_model'] = $this->{$modelClass}->name;
 		$this->request->data['Rating']['foreign_id'] = $foreign_id;
 		$this->request->data['Rating']['author_ip'] = $this->request->clientIp();
 

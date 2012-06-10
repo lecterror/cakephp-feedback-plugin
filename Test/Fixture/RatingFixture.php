@@ -15,12 +15,12 @@ class RatingFixture extends CakeTestFixture
 	public $fields = array
 		(
 			'id' => array('type' => 'integer', 'null' => false, 'length' => 11, 'key' => 'primary'),
-			'foreign_table' => array('type' => 'string', 'null' => false, 'length' => 100),
+			'foreign_model' => array('type' => 'string', 'null' => false, 'length' => 100),
 			'foreign_id' => array('type' => 'integer', 'null' => false),
 			'author_ip' => array('type' => 'string', 'null' => true, 'default' => NULL, 'length' => 20),
 			'rating' => array('type' => 'float', 'null' => false),
 			'created' => array('type' => 'datetime', 'null' => true, 'default' => NULL),
-			'indexes' => array('ix_ratings_foreign_data' => array('column' => array('foreign_id', 'foreign_table'), 'unique' => 0)),
+			'indexes' => array('PRIMARY' => array('column' => 'id', 'unique' => 1), 'ix_ratings_foreign_data' => array('column' => array('foreign_id', 'foreign_model'), 'unique' => 0)),
 			'tableParameters' => array()
 		);
 
@@ -34,7 +34,7 @@ class RatingFixture extends CakeTestFixture
 			array
 			(
 				'id' => '1',
-				'foreign_table' => 'Article',
+				'foreign_model' => 'Article',
 				'foreign_id' => '1',
 				'author_ip' => '127.0.0.1',
 				'rating' => '0.5',
@@ -43,7 +43,7 @@ class RatingFixture extends CakeTestFixture
 			array
 			(
 				'id' => '2',
-				'foreign_table' => 'Article',
+				'foreign_model' => 'Article',
 				'foreign_id' => '1',
 				'author_ip' => '127.0.0.1',
 				'rating' => '4.5',

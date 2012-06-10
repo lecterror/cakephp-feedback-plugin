@@ -4,19 +4,20 @@ App::uses('FeedbackAppController', 'Feedback.Controller');
  * Comments Controller
  *
  * @property CommentsComponent $Comments
+ * @property AuthComponent $Auth
  */
 class CommentsController extends FeedbackAppController
 {
 	public $components = array('Feedback.Comments');
 
-	public function add($foreign_model, $foreign_id)
+	public function add($foreign_model = null, $foreign_id = null)
 	{
 		if (empty($foreign_model) ||
 			empty($foreign_id) ||
 			!$this->request->is('post')
 			)
 		{
-			$this->redirect('/');
+			return $this->redirect('/');
 		}
 
 		App::uses($foreign_model, 'Model');
@@ -24,23 +25,32 @@ class CommentsController extends FeedbackAppController
 
 		if (!($Model instanceof Model))
 		{
-			$this->redirect('/');
+			return $this->redirect('/');
 		}
 
 		if ($Model->hasAny(array($Model->primaryKey => $foreign_id)) == false)
 		{
-			$this->redirect('/');
+			return $this->redirect('/');
 		}
 
-		if ($this->request->data['Comment']['foreign_model'] != $foreign_model ||
+		if (!isset($this->request->data['Comment']['foreign_model']) ||
+			!isset($this->request->data['Comment']['foreign_id']) ||
+			$this->request->data['Comment']['foreign_model'] != $foreign_model ||
 			$this->request->data['Comment']['foreign_id'] != $foreign_id)
 		{
-			$this->redirect('/');
+			return $this->redirect('/');
 		}
 
-		$this->request->data['Comment']['foreign_table'] = $Model->name;
+		$user_id = null;
+
+		if (isset($this->Auth))
+		{
+			$user_id = $this->Auth->user('id');
+		}
+
+		$this->request->data['Comment']['foreign_model'] = $Model->name;
 		$this->request->data['Comment']['foreign_id'] = $foreign_id;
-		$this->request->data['Comment']['user_id'] = $this->Auth->user('id');
+		$this->request->data['Comment']['user_id'] = $user_id;
 		$this->request->data['Comment']['author_ip'] = $this->request->clientIp();
 
 		if (!$this->Comment->save($this->request->data))

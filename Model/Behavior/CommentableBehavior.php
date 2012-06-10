@@ -13,7 +13,7 @@ class CommentableBehavior extends ModelBehavior
 						'Comment' => array
 						(
 							'className'		=> 'Feedback.Comment',
-							'conditions'	=> sprintf('Comment.foreign_table = \'%s\'', $Model->name),
+							'conditions'	=> sprintf('Comment.foreign_model = \'%s\'', $Model->name),
 							'foreignKey'	=> 'foreign_id',
 						)
 					)

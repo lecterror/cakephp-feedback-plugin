@@ -13,7 +13,7 @@ class Rating extends FeedbackAppModel
  */
 	public $validate = array
 		(
-			'foreign_table' => array
+			'foreign_model' => array
 			(
 				'notempty' => array
 				(

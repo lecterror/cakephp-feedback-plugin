@@ -13,7 +13,7 @@ class RatedBehavior extends ModelBehavior
 						'Rating' => array
 						(
 							'className'		=> 'Feedback.Rating',
-							'conditions'	=> sprintf('Rating.foreign_table = \'%s\'', $Model->name),
+							'conditions'	=> sprintf('Rating.foreign_model = \'%s\'', $Model->name),
 							'foreignKey'	=> 'foreign_id',
 						)
 					)
