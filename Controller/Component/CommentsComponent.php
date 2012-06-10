@@ -42,7 +42,7 @@ class CommentsComponent extends Component
 
 	public function saveInfo()
 	{
-		$data = $this->_Collection->getController()->data;
+		$data = $this->_Collection->getController()->request->data;
 
 		$info = array();
 		$info['author_name'] = $data['Comment']['author_name'];

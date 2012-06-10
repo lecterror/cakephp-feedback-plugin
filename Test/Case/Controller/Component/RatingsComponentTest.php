@@ -1,5 +1,6 @@
 <?php
 
+App::uses('SessionComponent', 'Controller/Component');
 App::uses('RatingsComponent', 'Feedback.Controller/Component');
 App::uses('ComponentCollection', 'Controller');
 
@@ -51,7 +52,8 @@ class RatingsComponentTest extends CakeTestCase
 		$this->Ratings->Session = $this->getMock
 			(
 				'SessionComponent',
-				array('write')
+				array('write'),
+				array($this->Collection)
 			);
 	}
 

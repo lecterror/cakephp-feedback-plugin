@@ -1,5 +1,6 @@
 <?php
 
+App::uses('SessionComponent', 'Controller/Component');
 App::uses('CommentsController', 'Feedback.Controller');
 
 class Article extends CakeTestModel
@@ -34,6 +35,7 @@ class CommentsControllerTestCase extends ControllerTestCase
 					),
 					'components' => array
 					(
+						'Session',
 						'Feedback.Comments',
 					),
 				)

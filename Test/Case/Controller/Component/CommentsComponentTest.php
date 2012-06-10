@@ -103,7 +103,7 @@ class CommentsComponentTest extends CakeTestCase
 				'Comment' => $this->_cookieInfo
 			);
 
-		$this->Controller->data = $info;
+		$this->Controller->request->data = $info;
 
 		$this->Comments->Cookie->expects($this->once())
 			->method('write')
