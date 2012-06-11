@@ -53,6 +53,8 @@ class CommentsController extends FeedbackAppController
 		$this->request->data['Comment']['user_id'] = $user_id;
 		$this->request->data['Comment']['author_ip'] = $this->request->clientIp();
 
+		$this->Comment->create();
+
 		if (!$this->Comment->save($this->request->data))
 		{
 			$this->set('validation_errors', $this->Comment->validationErrors);

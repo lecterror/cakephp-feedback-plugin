@@ -21,7 +21,7 @@ class RatingsController extends FeedbackAppController
 		}
 	}
 
-	public function add($foreign_model, $foreign_id)
+	public function add($foreign_model = null, $foreign_id = null)
 	{
 		if (empty($foreign_model) ||
 			empty($foreign_id) ||
@@ -32,13 +32,7 @@ class RatingsController extends FeedbackAppController
 			return $this->redirect('/');
 		}
 
-		$modelClass = $model = $foreign_model;
-
-		if (strpos($foreign_model, '.') !== false)
-		{
-			list($model, $modelClass) = pluginSplit($foreign_model, true);
-			$model .= $modelClass;
-		}
+		list($modelClass, $model) = $this->parseModel($foreign_model);
 
 		App::uses($model, 'Model');
 		$this->loadModel($model);
@@ -73,7 +67,9 @@ class RatingsController extends FeedbackAppController
 			return;
 		}
 
-		if ($this->request->data['Rating']['foreign_model'] != $modelClass ||
+		if (!isset($this->request->data['Rating']['foreign_model']) ||
+			!isset($this->request->data['Rating']['foreign_id']) ||
+			$this->request->data['Rating']['foreign_model'] != $modelClass ||
 			$this->request->data['Rating']['foreign_id'] != $foreign_id)
 		{
 			return $this->redirect('/');
@@ -111,5 +107,32 @@ class RatingsController extends FeedbackAppController
 				'data' => $updated['RatingSummary'],
 			);
 		$this->set('output', $output);
+	}
+
+	/**
+	 * Takes input in form of a model name, with or without the plugin:
+	 *
+	 *  'Post'
+	 *  'Blog.Post'
+	 *
+	 * Returns an array of model path and model class:
+	 *
+	 *  array('Post', 'Post')
+	 *  array('Blog.Post', 'Post')
+	 *
+	 * @param string $model
+	 * @return array An array of model path and model class.
+	 */
+	private function parseModel($model)
+	{
+		if (strpos($model, '.') === false)
+		{
+			return array($model, $model);
+		}
+
+		list($model, $modelClass) = pluginSplit($foreign_model, true);
+		$model .= $modelClass;
+
+		return array($model, $modelClass);
 	}
 }

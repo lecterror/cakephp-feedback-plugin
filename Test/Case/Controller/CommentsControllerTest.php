@@ -3,8 +3,12 @@
 App::uses('SessionComponent', 'Controller/Component');
 App::uses('CommentsController', 'Feedback.Controller');
 
-class Article extends CakeTestModel
+if (!class_exists('Article'))
 {
+	class Article extends CakeTestModel
+	{
+		public $name = 'Article';
+	}
 }
 
 /**
@@ -30,7 +34,7 @@ class CommentsControllerTestCase extends ControllerTestCase
 				(
 					'models' => array
 					(
-						'Feedback.Comment' => array('save'),
+						'Feedback.Comment' => array('create', 'save'),
 						'Article' => array('hasAny'),
 					),
 					'components' => array
@@ -70,7 +74,7 @@ class CommentsControllerTestCase extends ControllerTestCase
 		$result = $this->testAction('/feedback/comments/add/Arse/1', array('return' => 'headers', 'method' => 'post'));
 	}
 
-	public function testAddCorrectRow()
+	public function testAddIncorrectRow()
 	{
 		$this->Article->expects($this->once())
 			->method('hasAny')
@@ -143,7 +147,7 @@ class CommentsControllerTestCase extends ControllerTestCase
 				)
 			))
 			->will($this->returnValue(false));
-				
+
 		$result = $this->testAction('/feedback/comments/add/Article/1', array('data' => $data, 'return' => 'vars', 'method' => 'post'));
 		$this->assertTrue(array_key_exists('validation_errors', $result));
 	}
