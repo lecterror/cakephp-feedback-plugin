@@ -1,5 +1,7 @@
 <?php
 
+App::uses('ModelBehavior', 'Model');
+
 class HoneypotBehavior extends ModelBehavior
 {
 	public function setup(Model $Model, $settings = array())

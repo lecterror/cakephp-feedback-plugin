@@ -1,5 +1,7 @@
 <?php
 
+App::uses('ModelBehavior', 'Model');
+
 class RatedBehavior extends ModelBehavior
 {
 	public function setup(Model $Model, array $settings)

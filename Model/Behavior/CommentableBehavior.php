@@ -1,5 +1,7 @@
 <?php
 
+App::uses('ModelBehavior', 'Model');
+
 class CommentableBehavior extends ModelBehavior
 {
 	public function setup(Model $Model, array $settings)

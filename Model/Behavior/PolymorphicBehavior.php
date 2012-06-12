@@ -1,6 +1,8 @@
 <?php
 /* SVN FILE: $Id: polymorphic.php 1375 2009-08-03 09:05:08Z AD7six $ */
 
+App::uses('ModelBehavior', 'Model');
+
 /**
  * Polymorphic Behavior.
  *
