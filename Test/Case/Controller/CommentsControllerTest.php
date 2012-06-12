@@ -62,10 +62,10 @@ class CommentsControllerTestCase extends ControllerTestCase
 	public function testAddInvalidCall()
 	{
 		$result = $this->testAction('/feedback/comments/add/Test', array('return' => 'headers', 'method' => 'post'));
-		$this->assertTrue(array_key_exists('Location', $result));
+		$this->assertArrayHasKey('Location', $result);
 
 		$result = $this->testAction('/feedback/comments/add/Test/1', array('return' => 'headers', 'method' => 'get'));
-		$this->assertTrue(array_key_exists('Location', $result));
+		$this->assertArrayHasKey('Location', $result);
 	}
 
 	public function testAddMissingModel()
@@ -82,7 +82,7 @@ class CommentsControllerTestCase extends ControllerTestCase
 			->will($this->returnValue(false));
 
 		$result = $this->testAction('/feedback/comments/add/Article/1', array('return' => 'headers', 'method' => 'post'));
-		$this->assertTrue(array_key_exists('Location', $result));
+		$this->assertArrayHasKey('Location', $result);
 	}
 
 	public function testAddMismatchedParams()
@@ -94,27 +94,27 @@ class CommentsControllerTestCase extends ControllerTestCase
 
 		$data = array();
 		$result = $this->testAction('/feedback/comments/add/Article/1', array('data' => $data, 'return' => 'headers', 'method' => 'post'));
-		$this->assertTrue(array_key_exists('Location', $result));
+		$this->assertArrayHasKey('Location', $result);
 
 		$data = array('Comment');
 		$result = $this->testAction('/feedback/comments/add/Article/1', array('data' => $data, 'return' => 'headers', 'method' => 'post'));
-		$this->assertTrue(array_key_exists('Location', $result));
+		$this->assertArrayHasKey('Location', $result);
 
 		$data = array('Comment' => array('foreign_model'));
 		$result = $this->testAction('/feedback/comments/add/Article/1', array('data' => $data, 'return' => 'headers', 'method' => 'post'));
-		$this->assertTrue(array_key_exists('Location', $result));
+		$this->assertArrayHasKey('Location', $result);
 
 		$data = array('Comment' => array('foreign_model', 'foreign_id'));
 		$result = $this->testAction('/feedback/comments/add/Article/1', array('data' => $data, 'return' => 'headers', 'method' => 'post'));
-		$this->assertTrue(array_key_exists('Location', $result));
+		$this->assertArrayHasKey('Location', $result);
 
 		$data = array('Comment' => array('foreign_model' => 'Article', 'foreign_id'));
 		$result = $this->testAction('/feedback/comments/add/Article/1', array('data' => $data, 'return' => 'headers', 'method' => 'post'));
-		$this->assertTrue(array_key_exists('Location', $result));
+		$this->assertArrayHasKey('Location', $result);
 
 		$data = array('Comment' => array('foreign_model' => 'Article', 'foreign_id' => 2));
 		$result = $this->testAction('/feedback/comments/add/Article/1', array('data' => $data, 'return' => 'headers', 'method' => 'post'));
-		$this->assertTrue(array_key_exists('Location', $result));
+		$this->assertArrayHasKey('Location', $result);
 	}
 
 	public function testAddBuildIncompleteData()
@@ -149,7 +149,7 @@ class CommentsControllerTestCase extends ControllerTestCase
 			->will($this->returnValue(false));
 
 		$result = $this->testAction('/feedback/comments/add/Article/1', array('data' => $data, 'return' => 'vars', 'method' => 'post'));
-		$this->assertTrue(array_key_exists('validation_errors', $result));
+		$this->assertArrayHasKey('validation_errors', $result);
 	}
 
 	public function testAddBuildAndSaveCorrectData()
@@ -186,7 +186,7 @@ class CommentsControllerTestCase extends ControllerTestCase
 		$this->controller->Comment->id = 5;
 				
 		$result = $this->testAction('/feedback/comments/add/Article/1', array('data' => $data, 'return' => 'headers', 'method' => 'post'));
-		$this->assertTrue(array_key_exists('Location', $result));
+		$this->assertArrayHasKey('Location', $result);
 		$this->assertContains('#comment-5', $result['Location']);
 	}
 
@@ -231,7 +231,7 @@ class CommentsControllerTestCase extends ControllerTestCase
 		$this->controller->Comments->expects($this->once())->method('saveInfo');
 				
 		$result = $this->testAction('/feedback/comments/add/Article/1', array('data' => $data, 'return' => 'headers', 'method' => 'post'));
-		$this->assertTrue(array_key_exists('Location', $result));
+		$this->assertArrayHasKey('Location', $result);
 		$this->assertContains('#comment-5', $result['Location']);
 	}
 
@@ -276,7 +276,7 @@ class CommentsControllerTestCase extends ControllerTestCase
 		$this->controller->Comments->expects($this->once())->method('forgetInfo');
 				
 		$result = $this->testAction('/feedback/comments/add/Article/1', array('data' => $data, 'return' => 'headers', 'method' => 'post'));
-		$this->assertTrue(array_key_exists('Location', $result));
+		$this->assertArrayHasKey('Location', $result);
 		$this->assertContains('#comment-5', $result['Location']);
 	}
 }

@@ -74,19 +74,19 @@ class RatingsControllerTest extends ControllerTestCase
 	public function testAddInvalidCall1()
 	{
 		$result = $this->testAction('/feedback/ratings/add/Test', array('return' => 'headers', 'method' => 'post'));
-		$this->assertTrue(array_key_exists('Location', $result));
+		$this->assertArrayHasKey('Location', $result);
 	}
 
 	public function testAddInvalidCall2()
 	{
 		$result = $this->testAction('/feedback/ratings/add/Test/1', array('return' => 'headers', 'method' => 'get'));
-		$this->assertTrue(array_key_exists('Location', $result));
+		$this->assertArrayHasKey('Location', $result);
 	}
 
 	public function testAddMissingModel()
 	{
 		$result = $this->testAction('/feedback/ratings/add/Arse/1', array('return' => 'headers', 'method' => 'post'));
-		$this->assertTrue(array_key_exists('Location', $result));
+		$this->assertArrayHasKey('Location', $result);
 	}
 
 	public function testAddIncorrectRow()
@@ -97,7 +97,7 @@ class RatingsControllerTest extends ControllerTestCase
 			->will($this->returnValue(false));
 
 		$result = $this->testAction('/feedback/ratings/add/Article/1', array('return' => 'headers', 'method' => 'post'));
-		$this->assertTrue(array_key_exists('Location', $result));
+		$this->assertArrayHasKey('Location', $result);
 	}
 
 	public function testAddRatingCookieExists()
@@ -139,7 +139,7 @@ class RatingsControllerTest extends ControllerTestCase
 
 		$data = array('Rating');
 		$result = $this->testAction('/feedback/ratings/add/Article/1', array('data' => $data, 'return' => 'headers', 'method' => 'post'));
-		$this->assertTrue(array_key_exists('Location', $result));
+		$this->assertArrayHasKey('Location', $result);
 	}
 
 	public function testAddMismatchedParams2()
@@ -156,7 +156,7 @@ class RatingsControllerTest extends ControllerTestCase
 
 		$data = array('Rating' => array('foreign_model'));
 		$result = $this->testAction('/feedback/ratings/add/Article/1', array('data' => $data, 'return' => 'headers', 'method' => 'post'));
-		$this->assertTrue(array_key_exists('Location', $result));
+		$this->assertArrayHasKey('Location', $result);
 	}
 
 	public function testAddMismatchedParams3()
@@ -173,7 +173,7 @@ class RatingsControllerTest extends ControllerTestCase
 
 		$data = array('Rating' => array('foreign_model', 'foreign_id'));
 		$result = $this->testAction('/feedback/ratings/add/Article/1', array('data' => $data, 'return' => 'headers', 'method' => 'post'));
-		$this->assertTrue(array_key_exists('Location', $result));
+		$this->assertArrayHasKey('Location', $result);
 	}
 
 	public function testAddMismatchedParams4()
@@ -190,7 +190,7 @@ class RatingsControllerTest extends ControllerTestCase
 
 		$data = array('Rating' => array('foreign_model' => 'Article', 'foreign_id'));
 		$result = $this->testAction('/feedback/ratings/add/Article/1', array('data' => $data, 'return' => 'headers', 'method' => 'post'));
-		$this->assertTrue(array_key_exists('Location', $result));
+		$this->assertArrayHasKey('Location', $result);
 	}
 
 	public function testAddMismatchedParams5()
@@ -207,7 +207,7 @@ class RatingsControllerTest extends ControllerTestCase
 
 		$data = array('Rating' => array('foreign_model' => 'Article', 'foreign_id' => 2));
 		$result = $this->testAction('/feedback/ratings/add/Article/1', array('data' => $data, 'return' => 'headers', 'method' => 'post'));
-		$this->assertTrue(array_key_exists('Location', $result));
+		$this->assertArrayHasKey('Location', $result);
 	}
 
 	public function testAddBuildIncompleteData()
