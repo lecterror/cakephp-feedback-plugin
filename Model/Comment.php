@@ -18,6 +18,24 @@ class Comment extends FeedbackAppModel
  */
 	public $validate = array
 		(
+			'foreign_model' => array
+			(
+				'notempty' => array
+				(
+					'rule' => array('notempty'),
+					'allowEmpty' => false,
+					'required' => true,
+				),
+			),
+			'foreign_id' => array
+			(
+				'notempty' => array
+				(
+					'rule' => array('notempty'),
+					'allowEmpty' => false,
+					'required' => true,
+				),
+			),
 			'author_name' => array
 			(
 				'notempty' => array
