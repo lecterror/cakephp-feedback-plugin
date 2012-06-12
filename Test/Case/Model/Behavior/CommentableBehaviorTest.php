@@ -33,7 +33,7 @@ class CommentableBehaviorTest extends CakeTestCase
 	{
 		$this->assertArrayNotHasKey('Comment', $this->Article->hasMany);
 
-		$this->Article->Behaviors->attach('Feedback.Commentable');
+		$this->Article->Behaviors->load('Feedback.Commentable');
 		$this->assertArrayHasKey('Comment', $this->Article->hasMany);
 
 		$expected = array
@@ -49,13 +49,13 @@ class CommentableBehaviorTest extends CakeTestCase
 			$this->assertEquals($expected[$key], $this->Article->hasMany['Comment'][$key]);
 		}
 
-		$this->Article->Behaviors->detach('Commentable');
+		$this->Article->Behaviors->unload('Commentable');
 		$this->assertArrayNotHasKey('Comment', $this->Article->hasMany);
 	}
 
 	public function testFind()
 	{
-		$this->Article->Behaviors->attach('Feedback.Commentable');
+		$this->Article->Behaviors->load('Feedback.Commentable');
 
 		$result = $this->Article->find('first', array('conditions' => array('id' => 2)));
 		$expected = array
@@ -85,5 +85,6 @@ class CommentableBehaviorTest extends CakeTestCase
 			);
 
 		$this->assertEquals($expected, $result);
+		$this->Article->Behaviors->unload('Commentable');
 	}
 }
