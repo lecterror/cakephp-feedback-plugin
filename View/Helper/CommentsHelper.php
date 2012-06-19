@@ -23,16 +23,17 @@ class CommentsHelper extends AppHelper
 		}
 	}
 
-
 	/**
+	 * Data must contain the row which hasMany comments and an array of comments (optional obviously).
 	 * 
-		// ol comments-container
-			// li comment
-				// div comment-body
-					// div comment-author
-						// gravatar
-						// name
-						// metadata
+	 * Options available:
+	 * 
+	 *  - model: In case the detection doesn't work, this will override the model.
+	 *  - showForm: Whether to show the "add new comment" form or not, defaults to true.
+	 *
+	 * @param array $data Data to use for comments and comment form
+	 * @param array $options Options which override those detected by the helper.
+	 * @return string HTML output
 	 */
 	function display_for(array $data, array $options = array())
 	{
