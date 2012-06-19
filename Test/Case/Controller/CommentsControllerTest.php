@@ -47,9 +47,12 @@ class CommentsControllerTestCase extends ControllerTestCase
 
 		$this->Article = ClassRegistry::init('Article');
 
-		$this->controller->request->expects($this->any())
-			->method('clientIp')
-			->will($this->returnValue('127.0.0.1'));
+		// this doesn't work due to cake mocking me...
+//		$this->controller->request->expects($this->any())
+//			->method('clientIp')
+//			->will($this->returnValue('127.0.0.1'));
+
+		$_SERVER['REMOTE_ADDR'] = '127.0.0.1';
 	}
 
 	public function tearDown()

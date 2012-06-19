@@ -51,16 +51,18 @@ class RatingsControllerTest extends ControllerTestCase
 
 		$this->Article = ClassRegistry::init('Article');
 
-		$this->controller->request->expects($this->any())
-			->method('clientIp')
-			->will($this->returnValue('127.0.0.1'));
-
-		$this->controller->request->expects($this->any())
-			->method('is')
-			->with('ajax')
-			->will($this->returnValue(true));
+		// this doesn't work due to cake mocking me...
+//		$this->controller->request->expects($this->any())
+//			->method('clientIp')
+//			->will($this->returnValue('127.0.0.1'));
+//
+//		$this->controller->request->expects($this->any())
+//			->method('is')
+//			->with('ajax')
+//			->will($this->returnValue(true));
 
 		$_SERVER['HTTP_X_REQUESTED_WITH'] = 'XMLHttpRequest';
+		$_SERVER['REMOTE_ADDR'] = '127.0.0.1';
 	}
 
 	public function tearDown()
