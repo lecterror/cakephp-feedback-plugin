@@ -61,7 +61,7 @@ class CommentsHelper extends AppHelper
 				throw new CakeException(__('Missing model for %s::%s() call', __CLASS__, __FUNCTION__));
 			}
 
-			$output .= $this->form($options['model'], $data[$options['model']][$Model->primaryKey]);
+			$output .= $this->form($options['model'], $data[$Model->alias][$Model->primaryKey]);
 		}
 
 		return $output;

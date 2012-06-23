@@ -2,8 +2,8 @@
 	<header>
 		<h2><?php echo __('Comments'); ?></h2>
 	</header>
-	<?php foreach ($comments as $comment): ?>
-		<div class="comment-list">
+	<div class="comment-list">
+		<?php foreach ($comments as $comment): ?>
 			<article class="comment-content">
 				<a id="comment-<?php echo $comment['id']; ?>"></a>
 				<div class="comment-body">
@@ -20,6 +20,6 @@
 					<span class="comment-metadata"><?php echo $permalink; ?></span>
 				</div>
 			</article>
-		</div>
-	<?php endforeach; ?>
+		<?php endforeach; ?>
+	</div>
 </section>

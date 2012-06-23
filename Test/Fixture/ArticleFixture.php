@@ -40,5 +40,11 @@ class ArticleFixture extends CakeTestFixture
 				'title' => 'This is my other title',
 				'content' => 'But this one has no references in it. Sorry about that old chap.',
 			),
+			array
+			(
+				'id' => 3,
+				'title' => 'There is only one God and his name is Chtulhu',
+				'content' => 'Yeah, did not continue the theme there..',
+			),
 		);
 }
