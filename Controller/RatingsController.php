@@ -32,7 +32,7 @@ class RatingsController extends FeedbackAppController
 			return $this->redirect('/');
 		}
 
-		list($modelClass, $model) = $this->parseModel($foreign_model);
+		list($model, $modelClass) = $this->parseModel($foreign_model);
 
 		App::uses($model, 'Model');
 		$this->loadModel($model);

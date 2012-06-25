@@ -45,7 +45,7 @@ class RatingsHelper extends AppHelper
 		return $output;
 	}
 
-	private function prepareParams($data, $options)
+	protected function prepareParams($data, $options)
 	{
 		$model = null;
 		$modelClass = null;
@@ -63,10 +63,10 @@ class RatingsHelper extends AppHelper
 			$model = current($this->models);
 		}
 
-		$random = intval(mt_rand());
-		$element_id = 'rating-'.$random;
-		$message_id = 'message-'.$random;
-		$values_id = 'values-'.$random;
+		$random_id = $this->getRandomId();
+		$element_id = 'rating-'.$random_id;
+		$message_id = 'message-'.$random_id;
+		$values_id = 'values-'.$random_id;
 		$id = $data[$modelClass]['id'];
 		$submit_url = $this->Html->url
 			(
@@ -113,5 +113,25 @@ class RatingsHelper extends AppHelper
 				'votes',
 				'user_vote'
 			);
+	}
+
+	/**
+	 * Extracted for easier testing.
+	 *
+	 * @return integer A random id.
+	 */
+	protected function getRandomId()
+	{
+		return intval(mt_rand());
+	}
+
+	/**
+	 * This method is to be used only for test purposes.
+	 *
+	 * @param array $models Models to be used for ratings.
+	 */
+	public function setModels($models)
+	{
+		$this->models = $models;
 	}
 }
