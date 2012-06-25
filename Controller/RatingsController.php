@@ -130,7 +130,7 @@ class RatingsController extends FeedbackAppController
 			return array($model, $model);
 		}
 
-		list($model, $modelClass) = pluginSplit($foreign_model, true);
+		list($model, $modelClass) = pluginSplit($model, true);
 		$model .= $modelClass;
 
 		return array($model, $modelClass);
