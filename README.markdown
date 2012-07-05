@@ -120,7 +120,7 @@ The Ratings component:
 		public $components = array('Feedback.Ratings' => array('on' => array('admin_view', 'view'))),
 	}	
 
-And finally the use of helper in your view:
+The helper:
 
 	<?php echo $this->Ratings->display_for($post); ?>
 
@@ -131,6 +131,13 @@ the plugin name if the model is a part of a plugin, i.e. `Blog.Post`.
 - modelClass: Model name without the plugin path, i.e. `Post`.
 
 Normally, these things will be detected automatically.
+
+Last, but not least, ratings require one last bit of code in your layout (or, if you prefer,
+in your view), a call to output the script for the actual submission of ratings:
+
+	<?php echo $this->fetch('script_execute'); ?>
+
+This is normally placed before the closing `</body>` tag.
 
 ## Contributing ##
 
