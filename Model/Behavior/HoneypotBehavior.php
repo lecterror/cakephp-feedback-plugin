@@ -15,14 +15,14 @@ App::uses('ModelBehavior', 'Model');
 
 class HoneypotBehavior extends ModelBehavior
 {
-	public function setup(Model $Model, $settings = array())
+	public function setup(Model $Model, $config = array())
 	{
 		if (!isset($this->settings[$Model->alias]))
 		{
 			$this->settings[$Model->alias] = array('field' => '', 'message' => '', 'errorField' => '');
 		}
 
-		$this->settings[$Model->alias] = array_merge($this->settings[$Model->alias], $settings);
+		$this->settings[$Model->alias] = array_merge($this->settings[$Model->alias], $config);
 	}
 
 	public function beforeValidate(Model $Model)

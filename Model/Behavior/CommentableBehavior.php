@@ -15,7 +15,7 @@ App::uses('ModelBehavior', 'Model');
 
 class CommentableBehavior extends ModelBehavior
 {
-	public function setup(Model $Model, array $settings)
+	public function setup(Model $Model, $config = array())
 	{
 		$Model->bindModel
 			(

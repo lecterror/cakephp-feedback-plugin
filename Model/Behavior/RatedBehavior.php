@@ -15,7 +15,7 @@ App::uses('ModelBehavior', 'Model');
 
 class RatedBehavior extends ModelBehavior
 {
-	public function setup(Model $Model, array $settings)
+	public function setup(Model $Model, $config = array())
 	{
 		$Model->bindModel
 			(
