@@ -233,7 +233,7 @@ class CommentsHelperTest extends CakeTestCase
 					'descendant' => array
 					(
 						'tag' => 'form',
-						'id' => 'FeedbackCommentViewForm',
+						'id' => 'CommentViewForm',
 						'attributes' => array
 						(
 							'action' => '/feedback/comments/add/CommentedArticle/2',

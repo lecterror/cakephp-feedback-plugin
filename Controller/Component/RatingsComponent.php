@@ -28,10 +28,12 @@ class RatingsComponent extends Component
 	{
 		parent::__construct($collection, $settings);
 		$this->settings = array_merge($this->_defaultSettings, $settings);
+	}
 
+	public function initialize(Controller $controller)
+	{
 		if (empty($this->models))
 		{
-			$controller = $collection->getController();
 			$plugin = '';
 
 			// due to cake creating models on the fly instead of looking for models

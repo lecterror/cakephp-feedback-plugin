@@ -10,6 +10,7 @@
 		LGPL <http://www.gnu.org/licenses/lgpl.html>
 		GPL <http://www.gnu.org/licenses/gpl.html>
 */
+App::uses('AppController', 'Controller');
 
 class FeedbackAppController extends AppController
 {

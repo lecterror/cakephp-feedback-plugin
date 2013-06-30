@@ -66,6 +66,8 @@ class RatingsComponentTest extends CakeTestCase
 				array('write'),
 				array($this->Collection)
 			);
+
+		$this->Ratings->initialize($this->Controller);
 	}
 
 	public function tearDown()
