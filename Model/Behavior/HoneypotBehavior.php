@@ -25,7 +25,7 @@ class HoneypotBehavior extends ModelBehavior
 		$this->settings[$Model->alias] = array_merge($this->settings[$Model->alias], $config);
 	}
 
-	public function beforeValidate(Model $Model)
+	public function beforeValidate(Model $Model, $options = array())
 	{
 		extract($this->settings[$Model->alias]);
 

@@ -55,7 +55,7 @@ class PolymorphicBehavior extends ModelBehavior {
  * @return void
  * @access public
  */
-	public function setup($Model, $settings = array()) {
+	public function setup(Model $Model, $settings = array()) {
 		if (!isset($this->settings[$Model->alias])) {
 			$this->settings[$Model->alias] = $this->_defaultSettings;
 		}
@@ -72,7 +72,7 @@ class PolymorphicBehavior extends ModelBehavior {
  * @access public
  * @return void
  */
-	public function afterFind($Model, $results, $primary = false) {
+	public function afterFind(Model $Model, $results, $primary = false) {
 		extract($this->settings[$Model->alias]);
 		if (App::import('Vendor', 'MiCache')) {
 			$models = MiCache::mi('models');
