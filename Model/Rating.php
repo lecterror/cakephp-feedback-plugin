@@ -26,9 +26,9 @@ class Rating extends FeedbackAppModel
 		(
 			'foreign_model' => array
 			(
-				'notempty' => array
+				'notBlank' => array
 				(
-					'rule' => array('notempty'),
+					'rule' => array('notBlank'),
 					//'message' => 'Your custom message here',
 					'allowEmpty' => false,
 					'required' => false,
@@ -38,9 +38,9 @@ class Rating extends FeedbackAppModel
 			),
 			'foreign_id' => array
 			(
-				'notempty' => array
+				'notBlank' => array
 				(
-					'rule' => array('notempty'),
+					'rule' => array('notBlank'),
 					//'message' => 'Your custom message here',
 					'allowEmpty' => false,
 					'required' => false,
@@ -50,9 +50,9 @@ class Rating extends FeedbackAppModel
 			),
 			'rating' => array
 			(
-				'notempty' => array
+				'notBlank' => array
 				(
-					'rule' => array('notempty'),
+					'rule' => array('notBlank'),
 					//'message' => 'Your custom message here',
 					'allowEmpty' => false,
 					'required' => true,

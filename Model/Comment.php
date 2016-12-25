@@ -31,27 +31,27 @@ class Comment extends FeedbackAppModel
 		(
 			'foreign_model' => array
 			(
-				'notempty' => array
+				'' => array
 				(
-					'rule' => array('notempty'),
+					'rule' => array('notBlank'),
 					'allowEmpty' => false,
 					'required' => true,
 				),
 			),
 			'foreign_id' => array
 			(
-				'notempty' => array
+				'notBlank' => array
 				(
-					'rule' => array('notempty'),
+					'rule' => array('notBlank'),
 					'allowEmpty' => false,
 					'required' => true,
 				),
 			),
 			'author_name' => array
 			(
-				'notempty' => array
+				'notBlank' => array
 				(
-					'rule' => array('notempty'),
+					'rule' => array('notBlank'),
 					'message' => 'Name cannot be empty',
 					'allowEmpty' => false,
 					//'required' => false,
@@ -61,9 +61,9 @@ class Comment extends FeedbackAppModel
 			),
 			'author_email' => array
 			(
-				'notempty' => array
+				'notBlank' => array
 				(
-					'rule' => array('notempty'),
+					'rule' => array('notBlank'),
 					'message' => 'E-mail address cannot be empty',
 					'allowEmpty' => false,
 					//'required' => false,
@@ -87,9 +87,9 @@ class Comment extends FeedbackAppModel
 			),
 			'content' => array
 			(
-				'notempty' => array
+				'notBlank' => array
 				(
-					'rule' => array('notempty'),
+					'rule' => array('notBlank'),
 					'message' => 'Comment cannot be empty',
 					'allowEmpty' => false,
 					//'required' => false,

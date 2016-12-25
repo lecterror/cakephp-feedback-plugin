@@ -82,6 +82,33 @@ class CommentsController extends FeedbackAppController
 			$this->Comments->forgetInfo();
 		}
 
-		$this->redirect($this->request->referer().'#comment-'.$this->Comment->id);
-	}
+        $this->redirect($this->request->referer() . '#comment-' . $this->Comment->id);
+    }
+
+    /**
+     * delete method
+     *
+     * @throws NotFoundException
+     * @throws MethodNotAllowedException
+     * @param string $id
+     * @return void
+     */
+    public function delete($id = null) {
+        $redirect = $this->request->referer() . '#comment';
+        if (!$this->request->is('post')) {
+            throw new MethodNotAllowedException();
+        }
+        $this->Comment->id = $id;
+        if (!$this->Comment->exists()) {
+            throw new NotFoundException(__d('feedback','Invalid request.'));
+        }
+        if ($this->Comment->delete()) {
+            $this->Flash->success(__d('feedback','Record deleted.'));
+            $this->redirect($redirect );
+        }
+        $this->Flash->error(__d('feedback','Failed, record was not deleted.'));
+
+        $this->redirect($redirect);
+    }
+
 }
