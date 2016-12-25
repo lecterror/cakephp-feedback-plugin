@@ -18,19 +18,19 @@ class CommentsHelper extends AppHelper
 {
 	public $helpers = array('Html', 'Form', 'Time', 'Goodies.Gravatar');
 
-	private $_defaultOptions = array
-		(
+	public $settings = array(
 			'model'		=> null,
 			'showForm'	=> true,
+                        'elementIndex'	=> 'Feedback.comment_index',
+                        'elementForm'	=> 'Feedback.comment_add',
 		);
 	
-	function __construct(View $view, $settings = array())
+	function __construct(View $view, $settings = null)
 	{
 		parent::__construct($view, $settings);
-
-		if (!empty($this->request->params['models']))
+                if ($this->settings['model']==null && !empty($this->request->params['models']))
 		{
-			$this->_defaultOptions['model'] = key($this->request->params['models']);
+			$this->settings['model'] = key($this->request->params['models']);
 		}
 	}
 
@@ -48,9 +48,9 @@ class CommentsHelper extends AppHelper
 	 */
 	function display_for(array $data, array $options = array())
 	{
-		$options = array_merge($this->_defaultOptions, $options);
-
-		if (empty($options['model']))
+		$this->settings = array_merge($this->settings, $options);
+                
+                if (empty($this->settings['model']))
 		{
 			throw new CakeException(__('Missing model for %s::%s() call', __CLASS__, __FUNCTION__));
 		}
@@ -59,20 +59,20 @@ class CommentsHelper extends AppHelper
 
 		if (isset($data['Comment']) && !empty($data['Comment']))
 		{
-			$output .= $this->_View->element('Feedback.comment_index', array('comments' => $data['Comment']));
+			$output .= $this->_View->element($this->settings['elementIndex'], array('comments' => $data['Comment']));
 		}
 
-		if ($options['showForm'])
+		if ($this->settings['showForm'])
 		{
-			App::uses($options['model'], 'Model');
-			$Model = ClassRegistry::init($options['model']);
+			App::uses($this->settings['model'], 'Model');
+			$Model = ClassRegistry::init($this->settings['model']);
 
 			if (empty($Model))
 			{
 				throw new CakeException(__('Missing model for %s::%s() call', __CLASS__, __FUNCTION__));
 			}
 
-			$output .= $this->form($options['model'], $data[$Model->alias][$Model->primaryKey]);
+			$output .= $this->form($this->settings['model'], $data[$Model->alias][$Model->primaryKey]);
 		}
 
 		return $output;
@@ -80,7 +80,8 @@ class CommentsHelper extends AppHelper
 
 	public function form($foreign_model, $foreign_id)
 	{
-		App::uses($foreign_model, 'Model');
+		
+             App::uses($foreign_model, 'Model');
 		$Model = ClassRegistry::init($foreign_model);
 
 		if (empty($Model))
@@ -94,6 +95,6 @@ class CommentsHelper extends AppHelper
 		}
 
 		$options = compact('foreign_model', 'foreign_id');
-		return $this->_View->element('Feedback.comment_add', $options);
+		return $this->_View->element($this->settings['elementForm'], $options);
 	}
 }
